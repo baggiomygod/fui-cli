@@ -22,7 +22,7 @@ program.version('1.0.0', '-V, --version') // 将-V，--sersion添加到命令中
                 inquirer.prompt([
                     {
                         name: 'author',
-                        message: '请输入作者名称(ipst)'
+                        message: '请输入作者名称'
                     },
                     {
                         name: 'description',

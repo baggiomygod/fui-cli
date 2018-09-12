@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "fui cli",
   "main": "src/index.js",
-  "repository": "git@github.com:ipstFE/ipst-cli.git",
+  "repository": "git@github.com:baggiomygod/fui-cli.git",
   "author": "wengfan",
   "license": "MIT",
   "bin": {

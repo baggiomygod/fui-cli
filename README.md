@@ -13,7 +13,7 @@ ipst-cli是可以快速创建项目基本骨架的手脚架工具，目的是避
 
 ## 安装
 ```
-    sudo npm install -g ipst-cli
+    sudo npm install -g fui-cli
     ipst-cli init 项目名称
     # 根据提示完成项目模板创建
 ```
