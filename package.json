@@ -7,7 +7,7 @@
   "author": "wengfan",
   "license": "MIT",
   "bin": {
-    "ipst":"bin/ipst"
+    "fui":"bin/fui"
   },
   "dependencies": {
     "chalk": "^2.4.1",
