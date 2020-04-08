@@ -5,24 +5,24 @@ const inquirer = require('inquirer')
 const ora = require('ora')
 const chalk = require('chalk')
 const symbols = require('log-symbols')
-
+const config = require('../config')
 const fs = require('fs')
 const templates = {
-    admin: 'github:baggiomygod/fui-admin',
-    multiple: 'git@github.com:baggiomygod/mul-template.git',
+    admin: 'github:baggiomygod/fui-admin-demo',
     mobile: 'github:baggiomygod/fui', // 暂无
     screen: 'github:baggiomygod/screen-template', // 暂无
     pwa: 'github:baggiomygod/fui-pwa' // 暂无
 }
-program.version('1.0.0', '-V, --version') // 将-V，--sersion添加到命令中，打印出版本号
-       .command('init <name>') // init命令初始化项目 name必须值
-       .action(name => { // action: 是执行init命令会发生的行为，在这里执行生成项目的过程
+program.version(require('../package').version, '-V, --version') // 将-V，--sersion添加到命令中，打印出版本号
+        .usage('<command> [options]')
+        .command('init <name>', 'generate a new project from a template') // init命令初始化项目 name必须值
+        .action(name => { // action: 是执行init命令会发生的行为，在这里执行生成项目的过程
             if (!fs.existsSync(name)) { // 如果读取不到name的文件夹 说明本地没有同名目录
                 // 需要用户输入的内容
                 inquirer.prompt([
                     {
                         name: 'author',
-                        message: '请输入作者名称'
+                        message: '请输入作者名称(ipst)'
                     },
                     {
                         name: 'description',
@@ -32,25 +32,12 @@ program.version('1.0.0', '-V, --version') // 将-V，--sersion添加到命令中
                         type: 'list',
                         message: '请选择模板类型:',
                         name: 'template',
-                        choices: ['pc', 'multiple', 'mobile', 'screen', 'pwa']
+                        choices: ['admin', 'mobile', 'screen', 'pwa']
                     }
                 ])
                 .then((answers) => {
-                    let templateRepository = ''
-                    // if (answers.template !== 'admin') {
-                    //     console.log(symbols.warning, chalk.yellow(answers.template + '模板建设中,暂不支持创建'))
-                    //     return
-                    // }
-                    
-                    switch(answers.template) {
-                        case 'admin':
-                            templateRepository = 'github:baggiomygod/fui-admin'
-                        break;
-                        case 'multiple':
-                            templateRepository = 'github:baggiomygod/mul-template'
-                        break;
-                        default:
-                            console.log(symbols.warning, chalk.yellow(answers.template + '模板建设中,暂不支持创建'))
+                    if (answers.template !== 'admin') {
+                        console.log(symbols.warning, chalk.yellow(answers.template + '模板建设中,暂不支持创建'))
                         return
                     }
                     const spinner = ora('正在下载模板...')
@@ -58,7 +45,7 @@ program.version('1.0.0', '-V, --version') // 将-V，--sersion添加到命令中
                     download(
                         // 'http://git@github.com:ipstFE/ipst_admin.git#master', // gitLab
                         // 'github:baggiomygod/fui-admin', // github baggiomygod
-                        templateRepository,
+                        'github:baggiomygod/fui-admin-demo',
                         name,
                         {
                             clone: true
@@ -74,7 +61,7 @@ program.version('1.0.0', '-V, --version') // 将-V，--sersion添加到命令中
                             const meta = {
                                 name: name,
                                 description: answers.description | '',
-                                author: answers.author | 'servyou'
+                                author: answers.author | 'ipst'
                             }
                             // 修改模板的package.json文件
                             const fileName = `${name}/package.json`
