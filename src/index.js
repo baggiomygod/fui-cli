@@ -5,10 +5,9 @@ const inquirer = require('inquirer')
 const ora = require('ora')
 const chalk = require('chalk')
 const symbols = require('log-symbols')
-const config = require('../config')
 const fs = require('fs')
 const templates = {
-    admin: 'github:baggiomygod/fui-admin-demo',
+    admin: 'github:baggiomygod/fui-admin-demo', // 'github:baggiomygod/fui-admin-demo',
     mobile: 'github:baggiomygod/fui', // 暂无
     screen: 'github:baggiomygod/screen-template', // 暂无
     pwa: 'github:baggiomygod/fui-pwa' // 暂无
@@ -45,7 +44,7 @@ program.version(require('../package').version, '-V, --version') // 将-V，--ser
                     download(
                         // 'http://git@github.com:ipstFE/ipst_admin.git#master', // gitLab
                         // 'github:baggiomygod/fui-admin', // github baggiomygod
-                        'github:baggiomygod/fui-admin-demo',
+                        templates.admin,
                         name,
                         {
                             clone: true
